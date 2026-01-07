@@ -5,7 +5,7 @@ networks:
 
 services:
   opens1:
-    image: opensearchproject/opensearch:3.4.0
+    image: opensearchproject/opensearch:2.19.4
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens1
@@ -35,7 +35,7 @@ services:
         condition: on-failure
 
   opens2:
-    image: opensearchproject/opensearch:3.4.0
+    image: opensearchproject/opensearch:2.19.4
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens2
@@ -65,7 +65,7 @@ services:
         condition: on-failure
 
   opens3:
-    image: opensearchproject/opensearch:3.4.0
+    image: opensearchproject/opensearch:2.19.4
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens3
