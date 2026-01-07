@@ -41,6 +41,11 @@ services:
           - node.labels.role == b1
       restart_policy:
         condition: on-failure
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 512m
 
   opens2:
     image: opensearchproject/opensearch:2.19.4
@@ -75,6 +80,11 @@ services:
           - node.labels.role == b2
       restart_policy:
         condition: on-failure
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 512m
 
   opens3:
     image: opensearchproject/opensearch:2.19.4
@@ -109,3 +119,8 @@ services:
           - node.labels.role == b3
       restart_policy:
         condition: on-failure
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 512m
