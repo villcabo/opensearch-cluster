@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+*.log
+.env
+data/
+certificates/
+# Ignore self-signed certificates generated for testing
+root-ca.pem
+root-ca.key
+admin.pem
+admin.key
+node*.pem
+node*.key

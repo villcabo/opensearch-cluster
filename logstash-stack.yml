@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  logstash:
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.9.0
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+    ports:
+      - "0.0.0.0:5044:5044"
+      - "0.0.0.0:9601:9600" # Logstash monitoring API
+    environment:
+      - LS_JAVA_OPTS=-Xms256m -Xmx256m
+    networks:
+      - opensearch-net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  opensearch-net:
+    external: true
+    name: opensearch-net
