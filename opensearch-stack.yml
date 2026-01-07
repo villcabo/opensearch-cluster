@@ -33,6 +33,13 @@ services:
       - opensearch_admin_password
     networks:
       - opensearch-net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     deploy:
       mode: replicated
       replicas: 1
@@ -72,6 +79,13 @@ services:
       - opensearch_admin_password
     networks:
       - opensearch-net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     deploy:
       mode: replicated
       replicas: 1
@@ -111,6 +125,13 @@ services:
       - opensearch_admin_password
     networks:
       - opensearch-net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
     deploy:
       mode: replicated
       replicas: 1
