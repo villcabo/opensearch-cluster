@@ -64,26 +64,31 @@ Create the overlay network manually so it allows other services to attach:
 docker network create --driver overlay --attachable opensearch-net
 ```
 
-### 4. Configure Password (.env)
 
-Copy the example file to `.env`:
+### 4. Configure Admin Password (Docker Secret)
 
-```bash
-cp .env.example .env
-```
+For Docker Swarm, the admin password is managed securely using a Docker secret.
 
-Edit the `.env` file to set your admin password.
-**Note**: Must be at least 8 characters, contain 1 uppercase, 1 lowercase, 1 digit, and 1 special character.
+**1. Generate a strong password:**
 
 ```bash
-OPENSEARCH_INITIAL_ADMIN_PASSWORD=MyStrongPass123!
+openssl rand -base64 18
+# Ensure the result contains at least one uppercase, one lowercase, one digit, and one special character.
 ```
 
-> **Tip**: Generate a strong password using the command line:
+**2. Create the Docker secret:**
+
+```bash
+echo "<your_strong_password>" | docker secret create opensearch_admin_password -
+```
+
+Reemplaza `<your_strong_password>` por la contraseña generada.
+
+> **Nota:** Si necesitas actualizar la contraseña, primero elimina el secret anterior:
 > ```bash
-> openssl rand -base64 18
+> docker secret rm opensearch_admin_password
 > ```
-> (Ensure the result contains at least one uppercase, lowercase, digit, and special character).
+> y luego créalo de nuevo con el nuevo valor.
 
 ### 5. Deploy the Stacks
 

@@ -3,6 +3,10 @@ networks:
     external: true
     name: opensearch-net
 
+secrets:
+  opensearch_admin_password:
+    external: true
+
 services:
   opens1:
     image: opensearchproject/opensearch:2.19.4
@@ -15,7 +19,7 @@ services:
       - cluster.initial_master_nodes=opens1,opens2,opens3
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD_FILE=/run/secrets/opensearch_admin_password
     volumes:
       - /srv/opensearch/data/b1:/usr/share/opensearch/data
     ports:
@@ -25,6 +29,8 @@ services:
       - target: 9600
         published: 9600
         mode: host
+    secrets:
+      - opensearch_admin_password
     networks:
       - opensearch-net
     deploy:
@@ -47,7 +53,7 @@ services:
       - cluster.initial_master_nodes=opens1,opens2,opens3
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD_FILE=/run/secrets/opensearch_admin_password
     volumes:
       - /srv/opensearch/data/b2:/usr/share/opensearch/data
     ports:
@@ -57,6 +63,8 @@ services:
       - target: 9600
         published: 9600
         mode: host
+    secrets:
+      - opensearch_admin_password
     networks:
       - opensearch-net
     deploy:
@@ -79,7 +87,7 @@ services:
       - cluster.initial_master_nodes=opens1,opens2,opens3
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD_FILE=/run/secrets/opensearch_admin_password
     volumes:
       - /srv/opensearch/data/b3:/usr/share/opensearch/data
     ports:
@@ -89,6 +97,8 @@ services:
       - target: 9600
         published: 9600
         mode: host
+    secrets:
+      - opensearch_admin_password
     networks:
       - opensearch-net
     deploy:
