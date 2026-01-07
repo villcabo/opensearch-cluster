@@ -8,6 +8,8 @@ services:
     environment:
       - 'OPENSEARCH_HOSTS=["http://opens1:9200","http://opens2:9200","http://opens3:9200"]'
       - "OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
+    env_file:
+      - .env
     networks:
       - opensearch-net
     deploy:

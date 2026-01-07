@@ -6,6 +6,8 @@ networks:
 services:
   opens1:
     image: opensearchproject/opensearch:2.19.4
+    env_file:
+      - .env
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens1
@@ -36,6 +38,8 @@ services:
 
   opens2:
     image: opensearchproject/opensearch:2.19.4
+    env_file:
+      - .env
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens2
@@ -66,6 +70,8 @@ services:
 
   opens3:
     image: opensearchproject/opensearch:2.19.4
+    env_file:
+      - .env
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opens3
